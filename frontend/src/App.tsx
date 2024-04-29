@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Location, SingleLocation } from "./modell";
+import { useState, useEffect } from "react";
+import { EnemyPokemon, Location, SingleLocation } from "./modell";
 import { getLocations, getSingleLocation } from "./api";
 
 const App = () => {
@@ -8,6 +8,7 @@ const App = () => {
   const [singleLocation, setSingleLocation] = useState<SingleLocation | null>(
     null
   );
+  const [randomPokemon, setRandomPokemon] = useState<EnemyPokemon | null>(null);
 
   const handleGetLocations = async () => {
     const response = await getLocations();
@@ -27,7 +28,26 @@ const App = () => {
     if (!response.success) return;
     const singleLocationResult = response.data;
     setSingleLocation(singleLocationResult);
+    console.log(singleLocationResult.pokemon_encounters);
   };
+
+  const handleRandomEnemyPokemon = async () => {
+    const length = singleLocation?.pokemon_encounters.length;
+    if (!length) return;
+    const minCeiled = Math.ceil(0);
+    const maxFloored = Math.floor(length);
+    const randomNumber = Math.floor(
+      Math.random() * (maxFloored - minCeiled) + minCeiled
+    );
+    const enemyPokemon = singleLocation.pokemon_encounters[randomNumber];
+    setRandomPokemon(enemyPokemon.pokemon);
+  };
+
+  useEffect(() => {
+    if (singleLocation) {
+      handleRandomEnemyPokemon();
+    }
+  });
 
   return (
     <>
@@ -38,7 +58,7 @@ const App = () => {
         </div>
       )}
 
-      {startGame && locations && (
+      {startGame && locations && !singleLocation && (
         <div>
           {locations.results.map((location, index) => (
             <div key={index}>
@@ -53,11 +73,9 @@ const App = () => {
         </div>
       )}
 
-      {singleLocation && (
+      {singleLocation && randomPokemon && (
         <div>
-          {singleLocation.pokemon_encounters.map((pokemon) => (
-            <p>{pokemon.pokemon.name}</p>
-          ))}
+          <h1>{randomPokemon.name}</h1>
         </div>
       )}
     </>

@@ -16,6 +16,8 @@ export const EnemyPokemonSchema = z.object({
   url: z.string().url(),
 });
 
+export type EnemyPokemon = z.infer<typeof EnemyPokemonSchema>;
+
 export const SingleLocationSchema = z.object({
   pokemon_encounters: z
     .object({
