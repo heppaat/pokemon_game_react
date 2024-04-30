@@ -18,9 +18,15 @@ const Encounter = (props: {
   };
 
   useEffect(() => {
-    const handleImageOfEnemyPokemon = () => {
-      const image = getImageOfEnemyPokemon(getIdFromUrl(enemyPokemon.url));
-      setimageOfEnemyPokemon(image);
+    const handleImageOfEnemyPokemon = async () => {
+      try {
+        const image = await getImageOfEnemyPokemon(
+          getIdFromUrl(enemyPokemon.url)
+        );
+        setimageOfEnemyPokemon(image);
+      } catch (error) {
+        console.log(error);
+      }
     };
     handleImageOfEnemyPokemon();
   }, [enemyPokemon.url]);
