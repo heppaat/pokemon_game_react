@@ -32,11 +32,12 @@ const Encounter = (props: {
   }, [enemyPokemon.url]);
 
   return (
-    <div>
+    <div className="flex flex-col items-center">
       <h1>{enemyPokemon.name}</h1>
       <p>{enemyPokemon.url}</p>
       <img src={imageOfEnemyPokemon} alt="enemyPokemon" />
       <button onClick={backToLocations}>Back to Locations</button>
+      <button>Choose your Pokemon</button>
     </div>
   );
 };
