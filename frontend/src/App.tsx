@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { EnemyPokemon, Location, SingleLocation } from "./modell";
 import { getLocations, getSingleLocation } from "./api";
+import Encounter from "./components/Encounter";
 
 const App = () => {
   const [startGame, setStartGame] = useState<boolean>(false);
@@ -75,7 +76,10 @@ const App = () => {
 
       {singleLocation && randomPokemon && (
         <div>
-          <h1>{randomPokemon.name}</h1>
+          <Encounter
+            enemyPokemon={randomPokemon}
+            backToLocations={() => setSingleLocation(null)}
+          />
         </div>
       )}
     </>
