@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { EnemyPokemon, Location, SingleLocation } from "./modell";
+import { EnemyPokemon, Locations, SingleLocation } from "./modell";
 import { getLocations, getSingleLocation } from "./api";
 import Encounter from "./components/Encounter";
 
 const App = () => {
   const [startGame, setStartGame] = useState<boolean>(false);
-  const [locations, setLocations] = useState<Location | null>(null);
+  const [locations, setLocations] = useState<Locations | null>(null);
   const [singleLocation, setSingleLocation] = useState<SingleLocation | null>(
     null
   );

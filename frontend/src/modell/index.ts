@@ -9,7 +9,7 @@ export const LocationsSchema = z.object({
     .array(),
 });
 
-export type Location = z.infer<typeof LocationsSchema>;
+export type Locations = z.infer<typeof LocationsSchema>;
 
 export const EnemyPokemonSchema = z.object({
   name: z.string(),

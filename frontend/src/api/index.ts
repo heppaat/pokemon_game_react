@@ -14,3 +14,6 @@ export const getSingleLocation = (url: string) =>
     url: url,
     schema: SingleLocationSchema,
   });
+
+export const getImageOfEnemyPokemon = (id: string) =>
+  `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
