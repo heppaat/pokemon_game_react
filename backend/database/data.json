@@ -1,0 +1,27 @@
+[
+  {
+    "name": "magikarp",
+    "url": "https://pokeapi.co/api/v2/pokemon/129/",
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/129.png"
+  },
+  {
+    "name": "geodude",
+    "url": "https://pokeapi.co/api/v2/pokemon/74/",
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/74.png"
+  },
+  {
+    "name": "shellder",
+    "url": "https://pokeapi.co/api/v2/pokemon/90/",
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/90.png"
+  },
+  {
+    "name": "gyarados",
+    "url": "https://pokeapi.co/api/v2/pokemon/130/",
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/130.png"
+  },
+  {
+    "name": "elekid",
+    "url": "https://pokeapi.co/api/v2/pokemon/239/",
+    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/239.png"
+  }
+]
