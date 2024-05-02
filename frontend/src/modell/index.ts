@@ -27,3 +27,13 @@ export const SingleLocationSchema = z.object({
 });
 
 export type SingleLocation = z.infer<typeof SingleLocationSchema>;
+
+export const MyPokemonSchema = z
+  .object({
+    name: z.string(),
+    url: z.string().url(),
+    spriteUrl: z.string().url(),
+  })
+  .array();
+
+export type MyPokemons = z.infer<typeof MyPokemonSchema>;

@@ -1,5 +1,9 @@
 import { safeFetch } from "../lib/http";
-import { LocationsSchema, SingleLocationSchema } from "../modell";
+import {
+  LocationsSchema,
+  SingleLocationSchema,
+  MyPokemonSchema,
+} from "../modell";
 
 export const getLocations = () =>
   safeFetch({
@@ -17,3 +21,10 @@ export const getSingleLocation = (url: string) =>
 
 export const getImageOfEnemyPokemon = (id: string) =>
   `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+
+export const getMyPokemons = () =>
+  safeFetch({
+    method: "GET",
+    url: "http://localhost:3002/api/myPokemons",
+    schema: MyPokemonSchema,
+  });
