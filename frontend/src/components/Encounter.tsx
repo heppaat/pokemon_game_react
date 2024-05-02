@@ -55,12 +55,12 @@ const Encounter = (props: {
           <h1>{enemyPokemon.name}</h1>
           <p>{enemyPokemon.url}</p>
           <img src={imageOfEnemyPokemon} alt="enemyPokemon" />
-          <button onClick={backToLocations}>Back to Locations</button>
           <button onClick={handleGetMyPokemons}>Choose your Pokemon</button>
+          <button onClick={backToLocations}>Back to Locations</button>
         </div>
       )}
 
-      {myPokemons && (
+      {myPokemons && !myChoosenPokemon && (
         <div>
           {myPokemons.map((myPokemon, index) => (
             <div key={index} className="flex flex-col items-center m-4">
@@ -86,6 +86,26 @@ const Encounter = (props: {
             </button>
           </div>
         </div>
+      )}
+
+      {myChoosenPokemon && (
+        <main>
+          <div className="flex flex-wrap justify-around items-center gap-4">
+            <div className="flex flex-col items-center">
+              <h1>{enemyPokemon.name}</h1>
+              <p>{enemyPokemon.url}</p>
+              <img src={imageOfEnemyPokemon} alt="enemyPokemon" />
+            </div>
+            <div className="flex flex-col items-center">
+              <h1>{myChoosenPokemon.name}</h1>
+              <p>{myChoosenPokemon.url}</p>
+              <img src={myChoosenPokemon.spriteUrl} alt="myPokemon" />
+            </div>
+          </div>
+          <div className="flex justify-center">
+            <button>Fight</button>
+          </div>
+        </main>
       )}
     </>
   );
