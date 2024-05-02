@@ -26,5 +26,5 @@ export const getMyPokemons = () =>
   safeFetch({
     method: "GET",
     url: "http://localhost:3002/api/myPokemons",
-    schema: MyPokemonSchema,
+    schema: MyPokemonSchema.array(),
   });

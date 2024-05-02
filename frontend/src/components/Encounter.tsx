@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getImageOfEnemyPokemon, getMyPokemons } from "../api";
-import { EnemyPokemon, MyPokemons } from "../modell";
+import { EnemyPokemon, MyPokemon } from "../modell";
 
 const Encounter = (props: {
   enemyPokemon: EnemyPokemon;
@@ -8,10 +8,13 @@ const Encounter = (props: {
 }) => {
   const { enemyPokemon, backToLocations } = props;
 
-  const [imageOfEnemyPokemon, setimageOfEnemyPokemon] = useState<
+  const [imageOfEnemyPokemon, setImageOfEnemyPokemon] = useState<
     string | undefined
   >(undefined);
-  const [myPokemons, setMyPokemons] = useState<MyPokemons | null>(null);
+  const [myPokemons, setMyPokemons] = useState<MyPokemon[] | null>(null);
+  const [myChoosenPokemon, setMyChoosenPokemon] = useState<MyPokemon | null>(
+    null
+  );
 
   const getIdFromUrl = (url: string) => {
     const id = url.split("/")[6];
@@ -19,12 +22,10 @@ const Encounter = (props: {
   };
 
   useEffect(() => {
-    const handleImageOfEnemyPokemon = async () => {
+    const handleImageOfEnemyPokemon = () => {
       try {
-        const image = await getImageOfEnemyPokemon(
-          getIdFromUrl(enemyPokemon.url)
-        );
-        setimageOfEnemyPokemon(image);
+        const image = getImageOfEnemyPokemon(getIdFromUrl(enemyPokemon.url));
+        setImageOfEnemyPokemon(image);
       } catch (error) {
         console.log(error);
       }
@@ -38,6 +39,14 @@ const Encounter = (props: {
     const myPokemonsData = response.data;
     setMyPokemons(myPokemonsData);
   };
+
+  const handleChooseMyPokemon = (myPokemon: MyPokemon) => {
+    setMyChoosenPokemon(myPokemon);
+  };
+
+  useEffect(() => {
+    if (myChoosenPokemon) console.log(myChoosenPokemon);
+  }, [myChoosenPokemon]);
 
   return (
     <>
@@ -54,10 +63,21 @@ const Encounter = (props: {
       {myPokemons && (
         <div>
           {myPokemons.map((myPokemon, index) => (
-            <div key={index} className="flex flex-col items-center">
+            <div key={index} className="flex flex-col items-center m-4">
               <h1>{myPokemon.name}</h1>
               <p>{myPokemon.url}</p>
               <img src={myPokemon.spriteUrl} alt="myPokemon" />
+              <button
+                onClick={() =>
+                  handleChooseMyPokemon({
+                    name: myPokemon.name,
+                    url: myPokemon.url,
+                    spriteUrl: myPokemon.spriteUrl,
+                  })
+                }
+              >
+                Choose
+              </button>
             </div>
           ))}
           <div className="flex justify-center">
