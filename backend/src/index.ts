@@ -11,7 +11,7 @@ server.get("/api/myPokemons", async (req, res) => {
   const myPokemons = await load("data", MyPokemonSchema.array());
   if (!myPokemons) return res.sendStatus(500);
 
-  return res.json(myPokemons);
+  res.json(myPokemons);
 });
 
 server.listen(3002);

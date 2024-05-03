@@ -32,7 +32,7 @@ const App = () => {
     console.log(singleLocationResult.pokemon_encounters);
   };
 
-  const handleRandomEnemyPokemon = async () => {
+  const getRandomEnemyPokemon = async () => {
     const length = singleLocation?.pokemon_encounters.length;
     if (!length) return;
     const minCeiled = Math.ceil(0);
@@ -46,7 +46,7 @@ const App = () => {
 
   useEffect(() => {
     if (singleLocation) {
-      handleRandomEnemyPokemon();
+      getRandomEnemyPokemon();
     }
   });
 

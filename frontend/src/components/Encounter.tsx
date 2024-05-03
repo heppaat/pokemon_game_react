@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getImageOfEnemyPokemon, getMyPokemons } from "../api";
 import { EnemyPokemon, MyPokemon } from "../modell";
+import Battle from "./Battle";
 
 const Encounter = (props: {
   enemyPokemon: EnemyPokemon;
@@ -22,7 +23,7 @@ const Encounter = (props: {
   };
 
   useEffect(() => {
-    const handleImageOfEnemyPokemon = () => {
+    const enemyPokemonSprite = () => {
       try {
         const image = getImageOfEnemyPokemon(getIdFromUrl(enemyPokemon.url));
         setImageOfEnemyPokemon(image);
@@ -30,7 +31,7 @@ const Encounter = (props: {
         console.log(error);
       }
     };
-    handleImageOfEnemyPokemon();
+    enemyPokemonSprite();
   }, [enemyPokemon.url]);
 
   const handleGetMyPokemons = async () => {
@@ -90,21 +91,11 @@ const Encounter = (props: {
 
       {myChoosenPokemon && (
         <main>
-          <div className="flex flex-wrap justify-around items-center gap-4">
-            <div className="flex flex-col items-center">
-              <h1>{enemyPokemon.name}</h1>
-              <p>{enemyPokemon.url}</p>
-              <img src={imageOfEnemyPokemon} alt="enemyPokemon" />
-            </div>
-            <div className="flex flex-col items-center">
-              <h1>{myChoosenPokemon.name}</h1>
-              <p>{myChoosenPokemon.url}</p>
-              <img src={myChoosenPokemon.spriteUrl} alt="myPokemon" />
-            </div>
-          </div>
-          <div className="flex justify-center">
-            <button>Fight</button>
-          </div>
+          <Battle
+            randomEnemyPokemon={enemyPokemon}
+            enemyImage={imageOfEnemyPokemon!}
+            myPokemon={myChoosenPokemon}
+          />
         </main>
       )}
     </>

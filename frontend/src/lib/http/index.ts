@@ -37,6 +37,7 @@ export const safeFetch = async <Schema extends z.ZodTypeAny>(config: {
     const result = schema.safeParse(data);
 
     if (!result.success) return { success: false, status: response.status };
+
     return { data: result.data, success: true, status: response.status };
   } catch (error) {
     return { success: false, status: null };

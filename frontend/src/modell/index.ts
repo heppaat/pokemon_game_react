@@ -35,3 +35,16 @@ export const MyPokemonSchema = z.object({
 });
 
 export type MyPokemon = z.infer<typeof MyPokemonSchema>;
+
+export const StatsSchema = z.object({
+  stats: z
+    .object({
+      base_stat: z.number(),
+      stat: z.object({
+        name: z.string(),
+      }),
+    })
+    .array(),
+});
+
+export type Stats = z.infer<typeof StatsSchema>;

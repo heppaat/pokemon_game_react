@@ -3,6 +3,7 @@ import {
   LocationsSchema,
   SingleLocationSchema,
   MyPokemonSchema,
+  StatsSchema,
 } from "../modell";
 
 export const getLocations = () =>
@@ -27,4 +28,11 @@ export const getMyPokemons = () =>
     method: "GET",
     url: "http://localhost:3002/api/myPokemons",
     schema: MyPokemonSchema.array(),
+  });
+
+export const getStats = (url: string) =>
+  safeFetch({
+    method: "GET",
+    url: url,
+    schema: StatsSchema,
   });
