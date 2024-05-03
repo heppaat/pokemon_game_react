@@ -9,17 +9,53 @@ const Battle = (props: {
 }) => {
   const { randomEnemyPokemon, enemyImage, myPokemon } = props;
 
-  const [stats, setStats] = useState<Stats | null>(null);
+  type PokemonStat = {
+    hp: number;
+    attack: number;
+    defense: number;
+  };
+
+  const [myStats, setMyStats] = useState<PokemonStat | null>(null);
+  const [enemyStats, setEnemyStats] = useState<PokemonStat | null>(null);
 
   useEffect(() => {
     const allStats = async () => {
-      const response = await getStats(myPokemon.url);
-      if (!response.success) return;
-      const statistics = response.data;
-      setStats(statistics);
+      const myResponse = await getStats(myPokemon.url);
+      if (!myResponse.success) return;
+      const myStatsData = myResponse.data;
+
+      const findStats = (statName: string, statObject: Stats) => {
+        let statNumber = 0;
+        statObject.stats.forEach((element) => {
+          if (element.stat.name === statName) {
+            statNumber = element.base_stat;
+          }
+        });
+        return statNumber;
+      };
+
+      const myPokemonsStats: PokemonStat = {
+        hp: findStats("hp", myStatsData),
+        attack: findStats("attack", myStatsData),
+        defense: findStats("defense", myStatsData),
+      };
+
+      setMyStats(myPokemonsStats);
+
+      const enemyResponse = await getStats(randomEnemyPokemon.url);
+      if (!enemyResponse.success) return;
+      const enemyStatsData = enemyResponse.data;
+
+      const enemyPokemonStats: PokemonStat = {
+        hp: findStats("hp", enemyStatsData),
+        attack: findStats("attack", enemyStatsData),
+        defense: findStats("defense", enemyStatsData),
+      };
+
+      setEnemyStats(enemyPokemonStats);
     };
     allStats();
-  }, [myPokemon]);
+  }, [myPokemon.url, randomEnemyPokemon.url]);
 
   return (
     <main>
@@ -28,11 +64,17 @@ const Battle = (props: {
           <h1>{randomEnemyPokemon.name}</h1>
           <p>{randomEnemyPokemon.url}</p>
           <img src={enemyImage} alt="enemyPokemon" />
+          <p>Hp: {enemyStats?.hp}</p>
+          <p>Attack: {enemyStats?.attack}</p>
+          <p>Defense: {enemyStats?.defense}</p>
         </div>
         <div className="flex flex-col items-center">
           <h1>{myPokemon.name}</h1>
           <p>{myPokemon.url}</p>
           <img src={myPokemon.spriteUrl} alt="myPokemon" />
+          <p>Hp: {myStats?.hp}</p>
+          <p>Attack: {myStats?.attack}</p>
+          <p>Defense: {myStats?.defense}</p>
         </div>
       </div>
       <div className="flex justify-center">
