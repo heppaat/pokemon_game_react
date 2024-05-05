@@ -23,10 +23,5 @@
     "name": "elekid",
     "url": "https://pokeapi.co/api/v2/pokemon/239/",
     "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/239.png"
-  },
-  {
-    "name": "wingull",
-    "url": "https://pokeapi.co/api/v2/pokemon/278/",
-    "spriteUrl": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/278.png"
   }
 ]
