@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getStats } from "../api";
+import { addWonPokemon, getStats } from "../api";
 import { EnemyPokemon, MyPokemon, Stats } from "../modell";
 
 const Battle = (props: {
@@ -133,9 +133,23 @@ const Battle = (props: {
     }
   }, [myStats]);
 
-  if (enemyStats?.hp === 0) {
-    setGameEnd(true);
-  }
+  const getIdFromUrl = (url: string) => {
+    const id = url.split("/")[6];
+    return id;
+  };
+
+  useEffect(() => {
+    if (enemyStats?.hp === 0) {
+      setGameEnd(true);
+      addWonPokemon({
+        name: randomEnemyPokemon.name,
+        url: randomEnemyPokemon.url,
+        spriteUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${getIdFromUrl(
+          randomEnemyPokemon.url
+        )}.png`,
+      });
+    }
+  }, [enemyStats?.hp, randomEnemyPokemon.name, randomEnemyPokemon.url]);
 
   return (
     <>

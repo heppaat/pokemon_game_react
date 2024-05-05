@@ -1,9 +1,11 @@
 import { safeFetch } from "../lib/http";
+import { z } from "zod";
 import {
   LocationsSchema,
   SingleLocationSchema,
   MyPokemonSchema,
   StatsSchema,
+  MyPokemon,
 } from "../modell";
 
 export const getLocations = () =>
@@ -35,4 +37,12 @@ export const getStats = (url: string) =>
     method: "GET",
     url: url,
     schema: StatsSchema,
+  });
+
+export const addWonPokemon = (enemyPokemon: MyPokemon) =>
+  safeFetch({
+    method: "POST",
+    url: "http://localhost:3002/api/myPokemons/data",
+    schema: z.object({ success: z.boolean() }),
+    payload: enemyPokemon,
   });
