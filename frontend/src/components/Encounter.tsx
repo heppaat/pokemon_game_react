@@ -45,10 +45,6 @@ const Encounter = (props: {
     setMyChoosenPokemon(myPokemon);
   };
 
-  useEffect(() => {
-    if (myChoosenPokemon) console.log(myChoosenPokemon);
-  }, [myChoosenPokemon]);
-
   return (
     <>
       {!myPokemons && (
@@ -95,6 +91,8 @@ const Encounter = (props: {
             randomEnemyPokemon={enemyPokemon}
             enemyImage={imageOfEnemyPokemon!}
             myPokemon={myChoosenPokemon}
+            myAllPokemons={myPokemons!}
+            backToLocations={backToLocations}
           />
         </main>
       )}

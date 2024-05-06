@@ -1,13 +1,21 @@
 import { useEffect, useState } from "react";
 import { addWonPokemon, getStats } from "../api";
-import { EnemyPokemon, MyPokemon, Stats } from "../modell";
+import { AllMyPokemons, EnemyPokemon, MyPokemon, Stats } from "../modell";
 
 const Battle = (props: {
   randomEnemyPokemon: EnemyPokemon;
   enemyImage: string;
   myPokemon: MyPokemon;
+  myAllPokemons: AllMyPokemons;
+  backToLocations: () => void;
 }) => {
-  const { randomEnemyPokemon, enemyImage, myPokemon } = props;
+  const {
+    randomEnemyPokemon,
+    enemyImage,
+    myPokemon,
+    myAllPokemons,
+    backToLocations,
+  } = props;
 
   type PokemonStat = {
     hp: number;
@@ -20,6 +28,7 @@ const Battle = (props: {
   const [myTurn, setMyTurn] = useState<boolean>(true);
   const [counter, setCounter] = useState<number>(1);
   const [gameEnd, setGameEnd] = useState<boolean>(false);
+  const [duplicateError, setDuplicateError] = useState<string>("");
 
   useEffect(() => {
     const fetchPokemonStats = async () => {
@@ -141,6 +150,16 @@ const Battle = (props: {
   useEffect(() => {
     if (enemyStats?.hp === 0) {
       setGameEnd(true);
+
+      if (
+        myAllPokemons.some(
+          (pokemon) => pokemon.name === randomEnemyPokemon.name
+        )
+      ) {
+        setDuplicateError("this Pokemon is already in your list");
+        return;
+      }
+
       addWonPokemon({
         name: randomEnemyPokemon.name,
         url: randomEnemyPokemon.url,
@@ -148,8 +167,14 @@ const Battle = (props: {
           randomEnemyPokemon.url
         )}.png`,
       });
+      setDuplicateError("");
     }
-  }, [enemyStats?.hp, randomEnemyPokemon.name, randomEnemyPokemon.url]);
+  }, [
+    enemyStats?.hp,
+    randomEnemyPokemon.name,
+    randomEnemyPokemon.url,
+    myAllPokemons,
+  ]);
 
   return (
     <>
@@ -179,18 +204,28 @@ const Battle = (props: {
         </main>
       )}
 
-      {gameEnd && (
+      {gameEnd && !duplicateError && (
         <main>
           {myStats?.hp === 0 ? (
             <div>
               <h1>Game Over, You loose!</h1>
+              <button onClick={backToLocations}>Start a new game</button>
             </div>
           ) : (
             <div>
-              <h1>Congratulations, You won!</h1>
+              <h1>
+                Congratulations, You won, enemy Pokemon is now in your list!
+              </h1>
+              <button onClick={backToLocations}>Start a new game</button>
             </div>
           )}
         </main>
+      )}
+      {duplicateError && (
+        <div>
+          <h1>Congratulations, You won, however {duplicateError}</h1>
+          <button onClick={backToLocations}>Start a new game</button>
+        </div>
       )}
     </>
   );
