@@ -156,7 +156,7 @@ const Battle = (props: {
           (pokemon) => pokemon.name === randomEnemyPokemon.name
         )
       ) {
-        setDuplicateError("this Pokemon is already in your list");
+        setDuplicateError("this enemy Pokemon is already in your list");
         return;
       }
 
