@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { EnemyPokemon, Locations, SingleLocation } from "./modell";
 import { getLocations, getSingleLocation } from "./api";
 import Encounter from "./components/Encounter";
+import logo from "./assets/logo.png";
+import pikachu from "./assets/pikachu.png";
 
 const App = () => {
   const [startGame, setStartGame] = useState<boolean>(false);
@@ -53,10 +55,24 @@ const App = () => {
   return (
     <>
       {!startGame && !locations && (
-        <div>
-          <h1>Pokemon Logo</h1>
-          <button onClick={handleGetLocations}>Start Game</button>
-        </div>
+        <main className="h-screen flex flex-col items-center bg-[#ffde00]">
+          <section className="p-10">
+            <img src={logo} alt="pokemonLogo" />
+          </section>
+          <div className="flex gap-10">
+            <section className="max-w-[250px]">
+              <img src={pikachu} alt="pikachu" />
+            </section>
+            <div className="flex items-center">
+              <button
+                className="bg-[#3b4cca] px-8 py-4 text-[#F5F5F5] text-2xl uppercase rounded-full font-bold"
+                onClick={handleGetLocations}
+              >
+                Start Game
+              </button>
+            </div>
+          </div>
+        </main>
       )}
 
       {startGame && locations && !singleLocation && (
