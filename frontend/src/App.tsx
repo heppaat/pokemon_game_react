@@ -55,22 +55,22 @@ const App = () => {
   return (
     <>
       {!startGame && !locations && (
-        <main className="h-screen flex flex-col items-center bg-[#ffde00]">
-          <section className="p-10">
+        <main className="flex flex-col relative">
+          <section className="flex justify-center p-10">
             <img src={logo} alt="pokemonLogo" />
           </section>
-          <div className="flex gap-10">
-            <section className="max-w-[250px]">
+          <div className="flex justify-center gap-6 p-4">
+            <section className="max-w-[300px] relative">
               <img src={pikachu} alt="pikachu" />
             </section>
-            <div className="flex items-center">
+            <section className="max-w-[250px] w-[200px] relative">
               <button
-                className="bg-[#3b4cca] px-8 py-4 text-[#F5F5F5] text-2xl uppercase rounded-full font-bold"
+                className="bg-[#3b4cca] text-[#fbfff4] font-bold uppercase px-8 py-4 rounded-full absolute bottom-10"
                 onClick={handleGetLocations}
               >
                 Start Game
               </button>
-            </div>
+            </section>
           </div>
         </main>
       )}
