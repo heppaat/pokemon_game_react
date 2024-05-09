@@ -65,7 +65,7 @@ const App = () => {
             </section>
             <section className="max-w-[250px] w-[200px] relative">
               <button
-                className="bg-[#3b4cca] text-[#fbfff4] font-bold uppercase px-8 py-4 rounded-full absolute bottom-10"
+                className=" bg-[#3b4cca] text-[#fbfff4] font-bold uppercase px-8 py-4 rounded-full absolute bottom-10 hover:scale-105 hover:opacity-90 hover:shadow-xl transition-opacity, transition-scale duration-300 ease-in-out"
                 onClick={handleGetLocations}
               >
                 Start Game
