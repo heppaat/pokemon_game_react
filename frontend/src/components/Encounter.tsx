@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getImageOfEnemyPokemon, getMyPokemons } from "../api";
 import { EnemyPokemon, MyPokemon } from "../modell";
 import Battle from "./Battle";
+import { GradientColor } from "../enums";
 
 const Encounter = (props: {
   enemyPokemon: EnemyPokemon;
@@ -48,13 +49,51 @@ const Encounter = (props: {
   return (
     <>
       {!myPokemons && (
-        <div className="flex flex-col items-center">
-          <h1>{enemyPokemon.name}</h1>
-          <p>{enemyPokemon.url}</p>
-          <img src={imageOfEnemyPokemon} alt="enemyPokemon" />
-          <button onClick={handleGetMyPokemons}>Choose your Pokemon</button>
-          <button onClick={backToLocations}>Back to Locations</button>
-        </div>
+        <main>
+          <section className="flex justify-center">
+            <div
+              className={`flex justify-center p-10 w-[800px] m-10 rounded-3xl  bg-[#ffffff]/25 shadow-md`}
+            >
+              <h1 className="text-center tracking-wider font-extrabold text-[58px]">
+                ENEMY POKEMON
+              </h1>
+            </div>
+          </section>
+          <section className="flex flex-col justify-center items-center p-8">
+            <div
+              className={`bg-gradient-to-b ${GradientColor.magentaToMagenta} rounded-2xl hover:scale-105 hover:shadow-md duration-300 ease-in-out`}
+            >
+              <div className="flex justify-center pt-8">
+                <h1 className="bg-[#ffffff]/50 w-[150px] p-3 text-center rounded-xl uppercase font-medium tracking-wider text-[20px] shadow-md">
+                  {enemyPokemon.name}
+                </h1>
+              </div>
+              <img
+                className="w-[350px]"
+                src={imageOfEnemyPokemon}
+                alt="enemyPokemon"
+              />
+            </div>
+          </section>
+          <section className="flex flex-col items-center gap-6 m-8 pb-40">
+            <div className="bg-[#3b4cca] rounded-full px-8 py-4 hover:scale-105 hover:bg-[#475bf3] hover:shadow-xl transition-scale duration-300 ease-in-out">
+              <button
+                className="text-[20px] text-[#fbfff4] font-medium uppercase"
+                onClick={handleGetMyPokemons}
+              >
+                Choose your Own Pokemon
+              </button>
+            </div>
+            <div className="bg-[#C52018] rounded-full px-8 py-4 hover:scale-105 hover:bg-[#eb271c] hover:shadow-xl transition-scale duration-300 ease-in-out">
+              <button
+                className="text-[20px] text-[#fbfff4] font-medium uppercase"
+                onClick={backToLocations}
+              >
+                Back to Locations
+              </button>
+            </div>
+          </section>
+        </main>
       )}
 
       {myPokemons && !myChoosenPokemon && (

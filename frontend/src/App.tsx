@@ -56,7 +56,7 @@ const App = () => {
   return (
     <>
       {!startGame && !locations && (
-        <main className="flex flex-col relative">
+        <main className="flex flex-col relative bg-[#ffde00]">
           <section className="flex justify-center p-10">
             <img src={logo} alt="pokemonLogo" />
           </section>
@@ -81,12 +81,14 @@ const App = () => {
       )}
 
       {startGame && locations && !singleLocation && (
-        <main>
+        <main className="bg-[#ffde00]">
           <section className="flex justify-center">
             <div
-              className={`flex justify-center p-10 font-extrabold text-[#fbfff4] text-[58px] w-[800px] m-10 rounded-3xl bg-gradient-to-t ${GradientColor.blueToBlue} shadow-xl`}
+              className={`flex justify-center p-10 w-[900px] m-10 rounded-3xl bg-[#ffffff]/25 shadow-md`}
             >
-              <h1 className="text-center">CHOOSE YOUR LOCATION</h1>
+              <h1 className="text-center tracking-wider font-extrabold text-[58px]">
+                CHOOSE YOUR LOCATION
+              </h1>
             </div>
           </section>
           <div className="flex flex-wrap gap-8 p-8 justify-center">
@@ -102,7 +104,7 @@ const App = () => {
                   className={`bg-gradient-to-t ${GradientColor.blueToBlue} px-4 py-2 rounded-xl text-[#fbfff4]`}
                 >
                   <button
-                    className="uppercase font-medium"
+                    className="uppercase font-medium tracking-wider"
                     onClick={() => handleGetSingleLocation(location.url)}
                   >
                     Select
@@ -114,7 +116,7 @@ const App = () => {
           <div className="flex justify-center m-10 pb-40">
             <div className="bg-[#C52018] rounded-full px-8 py-4 hover:scale-105 hover:bg-[#eb271c] hover:shadow-xl transition-scale duration-300 ease-in-out">
               <button
-                className="text-[25px] text-[#fbfff4] uppercase font-semibold"
+                className="text-[20px] text-[#fbfff4] font-medium uppercase"
                 onClick={handleBackToMainPage}
               >
                 Back to main page
