@@ -235,24 +235,52 @@ const Battle = (props: {
       {gameEnd && !duplicateError && (
         <main>
           {myStats?.hp === 0 ? (
-            <div>
-              <h1>Game Over, You loose!</h1>
-              <button onClick={backToLocations}>Start a new game</button>
+            <div className="flex flex-col items-center">
+              <div className={`flex justify-center p-5 w-[900px] m-5`}>
+                <h1 className="text-center tracking-tight font-bold text-[58px]">
+                  Game Over, You loose!
+                </h1>
+              </div>
+
+              <button
+                className="bg-[#ce74ff] uppercase font-semibold px-8 py-4 mb-10 mt-6 shadow-3xl hover:bg-[#bb53f3] transition duration-200"
+                onClick={backToLocations}
+              >
+                Start a new game
+              </button>
             </div>
           ) : (
-            <div>
-              <h1>
-                Congratulations, You won, enemy Pokemon is now in your list!
-              </h1>
-              <button onClick={backToLocations}>Start a new game</button>
+            <div className="flex flex-col items-center">
+              <div className={`flex justify-center p-5 w-[900px] m-5`}>
+                <h1 className="text-center tracking-tight font-bold text-[58px]">
+                  Congratulations, You won, enemy Pokemon is now in your list!
+                </h1>
+              </div>
+
+              <button
+                className="bg-[#ce74ff] uppercase font-semibold px-8 py-4 mb-10 mt-6 shadow-3xl hover:bg-[#bb53f3] transition duration-200"
+                onClick={backToLocations}
+              >
+                Start a new game
+              </button>
             </div>
           )}
         </main>
       )}
       {duplicateError && (
-        <div>
-          <h1>Congratulations, You won, however {duplicateError}</h1>
-          <button onClick={backToLocations}>Start a new game</button>
+        <div className="flex flex-col items-center">
+          <div className={`flex justify-center p-5 w-[900px] m-5`}>
+            <h1 className="text-center tracking-tight font-bold text-[58px]">
+              Congratulations, You won, however {duplicateError}
+            </h1>
+          </div>
+
+          <button
+            className="bg-[#ce74ff] uppercase font-semibold px-8 py-4 mb-10 mt-6 shadow-3xl hover:bg-[#bb53f3] transition duration-200"
+            onClick={backToLocations}
+          >
+            Start a new game
+          </button>
         </div>
       )}
     </>
