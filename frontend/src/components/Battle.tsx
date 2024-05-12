@@ -180,26 +180,54 @@ const Battle = (props: {
     <>
       {!gameEnd && (
         <main>
-          <div className="flex flex-wrap justify-around items-center gap-4">
-            <div className="flex flex-col items-center">
-              <h1>{randomEnemyPokemon.name}</h1>
-              <p>{randomEnemyPokemon.url}</p>
-              <img src={enemyImage} alt="enemyPokemon" />
-              <p>Hp: {enemyStats?.hp}</p>
-              <p>Attack: {enemyStats?.attack}</p>
-              <p>Defense: {enemyStats?.defense}</p>
+          <section className="flex justify-center">
+            <div className={`flex justify-center p-5 w-[900px] m-5`}>
+              <h1 className="text-center tracking-tight font-bold text-[58px]">
+                FIGHT!
+              </h1>
             </div>
-            <div className="flex flex-col items-center">
-              <h1>{myPokemon.name}</h1>
-              <p>{myPokemon.url}</p>
-              <img src={myPokemon.spriteUrl} alt="myPokemon" />
-              <p>Hp: {myStats?.hp}</p>
-              <p>Attack: {myStats?.attack}</p>
-              <p>Defense: {myStats?.defense}</p>
+          </section>
+
+          <div className="flex flex-wrap justify-around items-center">
+            <div className="flex flex-col items-center bg-[#00e8ff] border-8 border-[#ff6596] hover:scale-105 hover:shadow-md duration-300 ease-in-out">
+              <div className="flex justify-center">
+                <h1 className="bg-[#ff6596] w-[175px] p-5 m-8 text-center font-bold tracking-wider text-[25px] shadow-md">
+                  {randomEnemyPokemon.name}
+                </h1>
+              </div>
+              <img className="w-[250px]" src={enemyImage} alt="enemyPokemon" />
+              <div className="flex flex-col bg-[#111a3b] w-[150px] p-3 m-8 font-semibold text-[#ffde00] tracking-wide text-[15px] gap-1 shadow-md">
+                <p>Hp: {enemyStats?.hp}</p>
+                <p>Attack: {enemyStats?.attack}</p>
+                <p>Defense: {enemyStats?.defense}</p>
+              </div>
+            </div>
+
+            <div className="flex flex-col items-center bg-[#00e8ff] border-8 border-[#ff6596] hover:scale-105 hover:shadow-md duration-300 ease-in-out">
+              <div className="flex justify-center ">
+                <h1 className="bg-[#ff6596] w-[175px] p-5 m-8 text-center font-bold tracking-wider text-[25px] shadow-md">
+                  {myPokemon.name}
+                </h1>
+              </div>
+              <img
+                className="w-[250px]"
+                src={myPokemon.spriteUrl}
+                alt="myPokemon"
+              />
+              <div className="flex flex-col bg-[#111a3b] w-[150px] p-3 m-8 font-semibold text-[#ffde00] tracking-wide text-[15px] gap-1 shadow-md">
+                <p>Hp: {myStats?.hp}</p>
+                <p>Attack: {myStats?.attack}</p>
+                <p>Defense: {myStats?.defense}</p>
+              </div>
             </div>
           </div>
-          <div className="flex justify-center">
-            <button onClick={handleBattle}>{counter}</button>
+          <div className="flex justify-center items-center py-5">
+            <button
+              className="bg-[#ce74ff] uppercase font-semibold px-8 py-4 mb-10 mt-6 shadow-3xl hover:bg-[#bb53f3] transition duration-200"
+              onClick={handleBattle}
+            >
+              ROUND {counter}
+            </button>
           </div>
         </main>
       )}

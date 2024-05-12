@@ -4,7 +4,6 @@ import { getLocations, getSingleLocation } from "./api";
 import Encounter from "./components/Encounter";
 import logo from "./assets/logo.png";
 import pikachu from "./assets/pikachu.png";
-import { GradientColor } from "./enums";
 
 const App = () => {
   const [startGame, setStartGame] = useState<boolean>(false);
@@ -56,7 +55,7 @@ const App = () => {
   return (
     <>
       {!startGame && !locations && (
-        <main className="flex flex-col relative bg-[#ffde00]">
+        <main className="flex flex-col relative">
           <section className="flex justify-center p-10">
             <img src={logo} alt="pokemonLogo" />
           </section>
@@ -70,7 +69,7 @@ const App = () => {
             </section>
             <section className="max-w-[250px] w-[200px] relative">
               <button
-                className="bg-[#3b4cca] text-[#fbfff4] font-bold uppercase px-8 py-4 rounded-full absolute bottom-10 hover:scale-105 hover:bg-[#475bf3] hover:shadow-xl transition-scale duration-300 ease-in-out"
+                className="bg-[#ff6596] uppercase font-semibold px-8 py-4 absolute bottom-10 shadow-3xl hover:bg-[#fa4c83] transition duration-200"
                 onClick={handleGetLocations}
               >
                 Start Game
@@ -81,13 +80,11 @@ const App = () => {
       )}
 
       {startGame && locations && !singleLocation && (
-        <main className="bg-[#ffde00]">
+        <main>
           <section className="flex justify-center">
-            <div
-              className={`flex justify-center p-10 w-[900px] m-10 rounded-3xl bg-[#ffffff]/25 shadow-md`}
-            >
-              <h1 className="text-center tracking-wider font-extrabold text-[58px]">
-                CHOOSE YOUR LOCATION
+            <div className={`flex justify-center p-5 w-[900px] m-5`}>
+              <h1 className="text-center tracking-tight font-bold text-[58px]">
+                CHOOSE YOUR AREA
               </h1>
             </div>
           </section>
@@ -95,33 +92,28 @@ const App = () => {
             {locations.results.map((location, index) => (
               <div
                 key={index}
-                className={`flex flex-col justify-center items-center gap-5 w-[300px] h-[150px] rounded-2xl bg-gradient-to-b ${GradientColor.yellowToYellow}  hover:scale-105 hover:shadow-md duration-300 ease-in-out`}
+                className={`flex flex-col justify-center items-center gap-5 w-[350px] h-[150px] bg-[#ff6596] hover:scale-105 hover:shadow-md duration-300 ease-in-out`}
               >
-                <h2 className="uppercase font-semibold text-center px-4">
+                <h2 className="font-semibold text-center px-4">
                   {location.name}
                 </h2>
-                <div
-                  className={`bg-gradient-to-t ${GradientColor.blueToBlue} px-4 py-2 rounded-xl text-[#fbfff4]`}
+
+                <button
+                  className="uppercase font-semibold tracking-wide bg-[#111a3b] px-4 py-3 text-[#ffde00] w-[250px]"
+                  onClick={() => handleGetSingleLocation(location.url)}
                 >
-                  <button
-                    className="uppercase font-medium tracking-wider"
-                    onClick={() => handleGetSingleLocation(location.url)}
-                  >
-                    Select
-                  </button>
-                </div>
+                  Go there
+                </button>
               </div>
             ))}
           </div>
-          <div className="flex justify-center m-10 pb-40">
-            <div className="bg-[#C52018] rounded-full px-8 py-4 hover:scale-105 hover:bg-[#eb271c] hover:shadow-xl transition-scale duration-300 ease-in-out">
-              <button
-                className="text-[20px] text-[#fbfff4] font-medium uppercase"
-                onClick={handleBackToMainPage}
-              >
-                Back to main page
-              </button>
-            </div>
+          <div className="flex justify-center pb-40 m-10 relative">
+            <button
+              className="bg-[#00e8ff] uppercase font-semibold px-8 py-4 absolute shadow-3xl hover:bg-[#30d3e1] transition duration-200"
+              onClick={handleBackToMainPage}
+            >
+              Back to main page
+            </button>
           </div>
         </main>
       )}
